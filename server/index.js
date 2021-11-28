@@ -34,16 +34,7 @@ app.use(cookieParser());
 // 라우팅
 app.use(controllers);
 
-// 서버 테스트
-app.get("/", (req, res) => {
-  res.status(200).send("hello world....!!");
-});
-
-app.listen(port, () => {
-  console.log(`서버가 ${port}번에서 작동중입니다.`);
-});
-
-const PORT = process.env.DATABASE_PORT || 80;
+const PORT = process.env.DATABASE_PORT || 443;
 
 // 인증서 파일들이 존재하는 경우에만 https 프로토콜을 사용하는 서버 실행
 // 만약 인증서 파일이 존재하지 않는경우, http 프로토콜을 사용하는 서버 실행
@@ -66,5 +57,9 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
   });
 };
 
-module.exports = server;
+// 서버 테스트
+app.get("/", (req, res) => {
+  res.status(200).send("hello world....!!");
+});
 
+module.exports = server;
